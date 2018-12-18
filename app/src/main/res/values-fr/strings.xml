@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CatalogueMovieUI_UX</string>
+    <string name="navigation_drawer_open">Ouvrir navigation drawer</string>
+    <string name="navigation_drawer_close">Fermer navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">La navigation header</string>
+    <string name="action_settings">Réglages</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="now_playing">LECTURE EN COURS</string>
+    <string name="upcoming">PROCHAIN</string>
+    <string name="masukan_nama_film">Chercher</string>
+    <string name="description">La description</string>
+    <string name="cari">Chercher</string>
+    <string name="date">Libération</string>
+    <string name="title">Titre</string>
+    <string name="Language">La langue</string>
+    <string name="rate">Taux</string>
+    <string name="share">Partager</string>
+    <string name="score">%s/10 La Score</string>
+</resources>

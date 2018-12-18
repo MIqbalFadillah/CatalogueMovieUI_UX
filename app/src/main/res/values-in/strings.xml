@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Katalog Movie UI UX</string>
+    <string name="navigation_drawer_open">Buka navigasi bergambar</string>
+    <string name="navigation_drawer_close">Buka navigasi bergambar</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Pengaturan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="now_playing">Sekarang Diputar</string>
+    <string name="upcoming">Akan Datang</string>
+    <string name="masukan_nama_film">Masukan Nama Film</string>
+    <string name="description">Deskripsi</string>
+    <string name="cari">Pencarian</string>
+    <string name="date">Terbit</string>
+    <string name="title">Judul</string>
+    <string name="Language">Bahasa</string>
+    <string name="rate">Tingkat</string>
+    <string name="share">Bagi</string>
+
+    <string name="click_me_to_see_the_awesomeness">Click me to see the Awesomeness!</string>
+    <string name="m_iqbal">Muhammad Iqbal Fadillah</string>
+    <string name="home">Halaman</string>
+    <string name="MyBlog">iqbalitfadil@gmail.com</string>
+    <string name="Now_Play">Sekarang Diputar</string>
+    <string name="Up_coming">Akan Datang</string>
+    <string name="detail">Detail</string>
+    <string name="favorit">Favorit</string>
+    <string name="search">pencarian</string>
+    <string name="score">%s/10 Nilai</string>
+    <string name="play_slideshow">Trailer</string>
+</resources>

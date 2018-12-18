@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CatalogueMovieUI_UX</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="now_playing">NOW PLAYING</string>
+    <string name="upcoming">UPCOMING</string>
+    <string name="masukan_nama_film">Search</string>
+    <string name="description">Description</string>
+    <string name="cari">Search</string>
+    <string name="date">Release</string>
+    <string name="title">title</string>
+    <string name="Language">Language</string>
+    <string name="rate">Rate</string>
+    <string name="share">Share</string>
+
+    <string name="click_me_to_see_the_awesomeness">Click me to see the Awesomeness!</string>
+    <string name="m_iqbal">Muhammad Iqbal Fadillah</string>
+    <string name="home">Home</string>
+    <string name="MyBlog">iqbalitfadil@gmail.com</string>
+    <string name="Now_Play">Now Playing</string>
+    <string name="Up_coming">Up Coming</string>
+    <string name="detail">Detail</string>
+    <string name="search">Search</string>
+    <string name="score">%s/10 SCORE</string>
+    <string name="play_slideshow">Trailer</string>
+</resources>
