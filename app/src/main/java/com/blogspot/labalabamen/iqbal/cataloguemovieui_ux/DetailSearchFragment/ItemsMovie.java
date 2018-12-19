@@ -1,12 +1,24 @@
 package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.json.JSONObject;
 
+import static android.provider.BaseColumns._ID;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_ID;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_OVERVIEW;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_POSTER;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_RATE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_RELEASE_DATE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_TITLE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.getFieldString;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.getFieldInt;
+
 public class ItemsMovie implements Parcelable {
 
+    private int id_movie;
     private String title_movie;
     private String description_movie;
     private String image_movie;
@@ -14,29 +26,36 @@ public class ItemsMovie implements Parcelable {
     private String realese_movie;
     private String language_movie;
 
-    public ItemsMovie (JSONObject object){
-        try {
-            String title = object.getString("title");
-            String description = object.getString("overview");
-            String language = object.getString("original_language");
-            String realase = object.getString("release_date");
-            String rate = object.getString("vote_average");
-            String image = object.getString("poster_path");
+//    public ItemsMovie (JSONObject object){
+//        try {
+//            String title = object.getString("title");
+//            String description = object.getString("overview");
+//            String language = object.getString("original_language");
+//            String realase = object.getString("release_date");
+//            String rate = object.getString("vote_average");
+//            String image = object.getString("poster_path");
+//
+//
+//            this.title_movie = title;
+//            this.description_movie = description;
+//            this.rate_movie = rate;
+//            this.image_movie = image;
+//            this.realese_movie = realase;
+//            this.language_movie = language;
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 
-
-            this.title_movie = title;
-            this.description_movie = description;
-            this.rate_movie = rate;
-            this.image_movie = image;
-            this.realese_movie = realase;
-            this.language_movie = language;
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+    public int getId_movie() {
+        return id_movie;
     }
 
+    public void setId_movie(int id_movie) {
+        this.id_movie = id_movie;
+    }
 
     public String getTitle_movie() {
         return title_movie;
@@ -100,6 +119,7 @@ public class ItemsMovie implements Parcelable {
         dest.writeString(this.realese_movie);
         dest.writeString(this.language_movie);
     }
+    public void ItemsMovie(){}
 
     protected ItemsMovie(Parcel in) {
         this.title_movie = in.readString();
@@ -109,6 +129,16 @@ public class ItemsMovie implements Parcelable {
         this.realese_movie = in.readString();
         this.language_movie = in.readString();
     }
+
+    public ItemsMovie(Cursor cursor){ //Ditambahkan untuk Content Provider purpose
+        this.id_movie             = getFieldInt(cursor, _ID);
+        this.title_movie          = getFieldString(cursor, FIELD_TITLE);
+        this.image_movie          = getFieldString(cursor, FIELD_POSTER);
+        this.realese_movie        = getFieldString(cursor, FIELD_RELEASE_DATE);
+        this.rate_movie           = getFieldString(cursor, FIELD_RATE);
+        this.description_movie    = getFieldString(cursor, FIELD_OVERVIEW);
+    }
+
 
     public static final Parcelable.Creator<ItemsMovie> CREATOR = new Parcelable.Creator<ItemsMovie>() {
         @Override

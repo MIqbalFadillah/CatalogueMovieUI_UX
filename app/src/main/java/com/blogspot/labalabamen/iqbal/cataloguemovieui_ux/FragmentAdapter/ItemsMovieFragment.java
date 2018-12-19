@@ -15,28 +15,28 @@ public class ItemsMovieFragment {
     private String realese_movie;
     private String language_movie;
 
-    public ItemsMovieFragment(JSONObject object) {
-        try {
-            String title = object.getString("title");
-            String description = object.getString("overview");
-            String language = object.getString("original_language");
-            String realase = object.getString("release_date");
-            String rate = object.getString("vote_average");
-            String image = object.getString("poster_path");
-
-
-            this.title_movie = title;
-            this.description_movie = description;
-            this.rate_movie = rate;
-            this.image_movie = image;
-            this.realese_movie = realase;
-            this.language_movie = language;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+//    public ItemsMovieFragment(JSONObject object) {
+//        try {
+//            String title = object.getString("title");
+//            String description = object.getString("overview");
+//            String language = object.getString("original_language");
+//            String realase = object.getString("release_date");
+//            String rate = object.getString("vote_average");
+//            String image = object.getString("poster_path");
+//
+//
+//            this.title_movie = title;
+//            this.description_movie = description;
+//            this.rate_movie = rate;
+//            this.image_movie = image;
+//            this.realese_movie = realase;
+//            this.language_movie = language;
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     public ItemsMovieFragment() {
 
