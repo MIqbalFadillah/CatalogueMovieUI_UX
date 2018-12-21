@@ -1,5 +1,6 @@
 package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,13 +8,24 @@ import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.I
 
 import org.json.JSONObject;
 
-public class ItemsMovieFragment {
+import static android.provider.BaseColumns._ID;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_OVERVIEW;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_POSTER;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_RATE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_RELEASE_DATE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField.FIELD_TITLE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.getFieldInt;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.getFieldString;
+
+public class ItemsMovieFragment implements Parcelable {
+
+    private int id_movie;
     private String title_movie;
     private String description_movie;
     private String image_movie;
     private String rate_movie;
     private String realese_movie;
-    private String language_movie;
+//    private String language_movie;
 
 //    public ItemsMovieFragment(JSONObject object) {
 //        try {
@@ -42,6 +54,35 @@ public class ItemsMovieFragment {
 
     }
 
+
+    protected ItemsMovieFragment(Parcel in) {
+        id_movie = in.readInt();
+        title_movie = in.readString();
+        description_movie = in.readString();
+        image_movie = in.readString();
+        rate_movie = in.readString();
+        realese_movie = in.readString();
+//        language_movie = in.readString();
+    }
+
+    public static final Creator<ItemsMovieFragment> CREATOR = new Creator<ItemsMovieFragment>() {
+        @Override
+        public ItemsMovieFragment createFromParcel(Parcel in) {
+            return new ItemsMovieFragment(in);
+        }
+
+        @Override
+        public ItemsMovieFragment[] newArray(int size) {
+            return new ItemsMovieFragment[size];
+        }
+    };
+    public int getId_movie() {
+        return id_movie;
+    }
+
+    public void setId_movie(int id_movie) {
+        this.id_movie = id_movie;
+    }
 
     public String getTitle_movie() {
         return title_movie;
@@ -83,12 +124,39 @@ public class ItemsMovieFragment {
         this.realese_movie = realese_movie;
     }
 
-    public String getLanguage_movie() {
-        return language_movie;
+//    public String getLanguage_movie() {
+//        return language_movie;
+//    }
+//
+//    public void setLanguage_movie(String language_movie) {
+//        this.language_movie = language_movie;
+//    }
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setLanguage_movie(String language_movie) {
-        this.language_movie = language_movie;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id_movie);
+        dest.writeString(title_movie);
+        dest.writeString(description_movie);
+        dest.writeString(image_movie);
+        dest.writeString(rate_movie);
+        dest.writeString(realese_movie);
+//        dest.writeString(language_movie);
+    }
+
+    public ItemsMovieFragment(Cursor cursor){ //untuk Content Provider
+        this.id_movie             = getFieldInt(cursor, _ID);
+        this.title_movie          = getFieldString(cursor, FIELD_TITLE);
+        this.image_movie          = getFieldString(cursor, FIELD_POSTER);
+        this.realese_movie        = getFieldString(cursor, FIELD_RELEASE_DATE);
+        this.rate_movie           = getFieldString(cursor, FIELD_RATE);
+        this.description_movie    = getFieldString(cursor, FIELD_OVERVIEW);
     }
 
 }

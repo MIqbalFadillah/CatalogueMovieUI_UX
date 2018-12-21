@@ -7,6 +7,8 @@ import com.loopj.android.http.SyncHttpClient;
 
 import android.content.Context;
 
+import cz.msebera.android.httpclient.Header;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -52,7 +54,6 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
         }
     }
 
-
     @Override
     public ArrayList<ItemsMovie> loadInBackground() {
         SyncHttpClient client = new SyncHttpClient();
@@ -67,7 +68,7 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
             }
 
             @Override
-            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
                     String result = new String(responseBody);
                     JSONObject responObject = new JSONObject(result);
@@ -75,7 +76,7 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
 
                     for (int i = 0 ; i < list.length() ; i++){
 
-                        JSONObject movie = list.getJSONObject(i);
+                            JSONObject movie = list.getJSONObject(i);
                         ItemsMovie movie_item = new ItemsMovie(movie);
                         ItemsesMovie.add(movie_item);
 
@@ -89,7 +90,7 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
             }
 
             @Override
-            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 
             }
             

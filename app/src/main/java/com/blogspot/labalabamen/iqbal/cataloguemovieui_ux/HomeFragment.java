@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.FavoriteHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.NowPlayingHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.UpcomingHome;
 
@@ -71,7 +72,8 @@ public class HomeFragment extends Fragment {
     private class fragmentChild extends FragmentPagerAdapter {
         String now_playing = getResources().getString(R.string.now_playing);
         String up_coming = getResources().getString(R.string.upcoming);
-        final String tabs[]={now_playing,up_coming};
+        String fav_movie = getResources().getString(R.string.Fav_movie);
+        final String tabs[]={now_playing,up_coming,fav_movie};
 
         public fragmentChild(FragmentManager childFragmentManager) {
             super(childFragmentManager);
@@ -84,6 +86,8 @@ public class HomeFragment extends Fragment {
                     return new NowPlayingHome();
                 case 1:
                     return new UpcomingHome();
+                case 2:
+                    return new FavoriteHome();
             }
             return null;
         }

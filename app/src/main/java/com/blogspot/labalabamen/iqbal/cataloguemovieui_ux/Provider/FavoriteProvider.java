@@ -19,7 +19,7 @@ public class FavoriteProvider extends ContentProvider {
     private static final int FAVORITE       = 100;
     private static final int FAVORITE_ID    = 101;
 
-    private MovieFavoriteHelper favoriteHelper;
+//    private MovieFavoriteHelper favoriteHelper;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -33,6 +33,8 @@ public class FavoriteProvider extends ContentProvider {
                 TABLE_NAME+ "/#",
                 FAVORITE_ID);
     }
+
+    private MovieFavoriteHelper favoriteHelper;
 
 
     @Override

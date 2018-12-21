@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.ItemsMovie;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;

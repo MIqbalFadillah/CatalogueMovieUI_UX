@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <permission
+        android:name="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +30,12 @@
         </activity>
         <activity android:name=".Move_Movie_Detail" />
         <activity android:name=".MainFragment.DetailHome"></activity>
+        <provider
+            android:name="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Provider.FavoriteProvider"
+            android:authorities="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux"
+            android:exported="true"
+            android:readPermission="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.READ_DATABASE"
+            android:writePermission="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.WRITE_DATABASE"/>
     </application>
 
 </manifest>

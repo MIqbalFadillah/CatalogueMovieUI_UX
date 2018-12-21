@@ -39,14 +39,14 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_list_movie, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_movie_fragment, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-        final ItemsMovie movieFragment = getItem(position);
+        final ItemsMovieFragment movieFragment = getItem(position);
         holder.title.setText(movieFragment.getTitle_movie());
 
         holder.rate.setText(movieFragment.getRate_movie());
@@ -103,11 +103,11 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
         return 0;
     }
 
-    private ItemsMovie getItem(int position){
+    private ItemsMovieFragment getItem(int position){
         if (!list.moveToPosition(position)) {
             throw new IllegalStateException("Position invalid");
         }
-        return new ItemsMovie(list);
+        return new ItemsMovieFragment(list);
     }
 
 
@@ -118,6 +118,14 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            rate = (TextView)itemView.findViewById(R.id.tv_item_rate);
+            title = (TextView)itemView.findViewById(R.id.tv_item_name);
+            imgMovie      = (ImageView) itemView.findViewById(R.id.img_item_photo);
+            overview    = (TextView) itemView.findViewById(R.id.tv_item_overview);
+            date        = (TextView) itemView.findViewById(R.id.tv_item_date);
+            btnShare    = (Button) itemView.findViewById(R.id.btn_set_share);
+            btnDetail = (Button) itemView.findViewById(R.id.btn_set_detail);
         }
     }
 

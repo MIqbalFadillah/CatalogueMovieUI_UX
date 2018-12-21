@@ -18,6 +18,8 @@ import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.Databa
 
 public class ItemsMovie implements Parcelable {
 
+
+
     private int id_movie;
     private String title_movie;
     private String description_movie;
@@ -26,28 +28,29 @@ public class ItemsMovie implements Parcelable {
     private String realese_movie;
     private String language_movie;
 
-//    public ItemsMovie (JSONObject object){
-//        try {
-//            String title = object.getString("title");
-//            String description = object.getString("overview");
-//            String language = object.getString("original_language");
-//            String realase = object.getString("release_date");
-//            String rate = object.getString("vote_average");
-//            String image = object.getString("poster_path");
-//
-//
-//            this.title_movie = title;
-//            this.description_movie = description;
-//            this.rate_movie = rate;
-//            this.image_movie = image;
-//            this.realese_movie = realase;
-//            this.language_movie = language;
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//    }
+    public ItemsMovie (JSONObject object){
+        try {
+            int id = object.getInt("id");
+            String title = object.getString("title");
+            String description = object.getString("overview");
+            String language = object.getString("original_language");
+            String realase = object.getString("release_date");
+            String rate = object.getString("vote_average");
+            String image = object.getString("poster_path");
+
+            this.id_movie = id;
+            this.title_movie = title;
+            this.description_movie = description;
+            this.rate_movie = rate;
+            this.image_movie = image;
+            this.realese_movie = realase;
+            this.language_movie = language;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     public int getId_movie() {
         return id_movie;
@@ -122,6 +125,7 @@ public class ItemsMovie implements Parcelable {
     public void ItemsMovie(){}
 
     protected ItemsMovie(Parcel in) {
+        this.id_movie = in.readInt();
         this.title_movie = in.readString();
         this.description_movie = in.readString();
         this.image_movie = in.readString();
@@ -130,17 +134,7 @@ public class ItemsMovie implements Parcelable {
         this.language_movie = in.readString();
     }
 
-    public ItemsMovie(Cursor cursor){ //Ditambahkan untuk Content Provider purpose
-        this.id_movie             = getFieldInt(cursor, _ID);
-        this.title_movie          = getFieldString(cursor, FIELD_TITLE);
-        this.image_movie          = getFieldString(cursor, FIELD_POSTER);
-        this.realese_movie        = getFieldString(cursor, FIELD_RELEASE_DATE);
-        this.rate_movie           = getFieldString(cursor, FIELD_RATE);
-        this.description_movie    = getFieldString(cursor, FIELD_OVERVIEW);
-    }
-
-
-    public static final Parcelable.Creator<ItemsMovie> CREATOR = new Parcelable.Creator<ItemsMovie>() {
+    public static final Creator<ItemsMovie> CREATOR = new Creator<ItemsMovie>() {
         @Override
         public ItemsMovie createFromParcel(Parcel source) {
             return new ItemsMovie(source);
