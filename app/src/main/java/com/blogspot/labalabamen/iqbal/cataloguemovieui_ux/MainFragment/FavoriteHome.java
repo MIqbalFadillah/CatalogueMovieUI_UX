@@ -57,7 +57,16 @@ public class FavoriteHome extends Fragment {
         return view;
 
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        new loadFavAsync().execute();
+    }
 
     private class loadFavAsync extends AsyncTask<Void, Void, Cursor> {
 
@@ -93,7 +102,7 @@ public class FavoriteHome extends Fragment {
         if (list.getCount() == 0) {
             ToastMessageShow("Tidak ada data saat ini");
         } else {
-            ToastMessageShow("Total list: "+list.getCount());
+            ToastMessageShow("Total list saat ini: "+list.getCount());
         }
     }
 
