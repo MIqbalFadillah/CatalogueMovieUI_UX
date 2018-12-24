@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         Cursor cursor = (Cursor) adapter.getItem(i);
 
-        int id = cursor.getInt(cursor.getColumnIndexOrThrow(FavoriteField._ID));
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow(FavoriteField.FIELD_ID));
         Intent intent = new Intent(MainActivity.this, Move_Movie_Detail.class);
-        intent.setData(Uri.parse(CONTENT_URI+"/"+id));
+        intent.setData(Uri.parse(CONTENT_URI+ "/" +id));
         startActivity(intent);
 
 

@@ -157,13 +157,11 @@ public class MainActivity extends AppCompatActivity
             fragment = new FavoriteHome();
 
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            title = getResources().getString(R.string.action_settings);
+            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(mIntent);
 
         }
-
         setFragment(fragment, title);
         return true;
     }

@@ -57,18 +57,7 @@ public class FavoriteHome extends Fragment {
         return view;
 
     }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ToastMessageShow("Favorite on onDestroy");
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        new loadFavAsync().execute();
-        ToastMessageShow("Favorite on onResume");
-    }
 
     private class loadFavAsync extends AsyncTask<Void, Void, Cursor> {
 

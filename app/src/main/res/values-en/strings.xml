@@ -28,6 +28,7 @@
     <string name="MyBlog">iqbalitfadil@gmail.com</string>
     <string name="Now_Play">Now Playing</string>
     <string name="Up_coming">Up Coming</string>
+    <string name="favorit">Favorite</string>
     <string name="detail">Detail</string>
     <string name="search">Search</string>
     <string name="score">%s/10 SCORE</string>

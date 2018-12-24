@@ -13,6 +13,7 @@
 
     <string name="now_playing">LECTURE EN COURS</string>
     <string name="upcoming">PROCHAIN</string>
+    <string name="favorit">Préféré</string>
     <string name="masukan_nama_film">Chercher</string>
     <string name="description">La description</string>
     <string name="cari">Chercher</string>

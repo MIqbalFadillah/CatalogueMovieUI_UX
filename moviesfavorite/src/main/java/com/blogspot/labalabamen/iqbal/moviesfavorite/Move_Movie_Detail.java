@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blogspot.labalabamen.iqbal.moviesfavorite.model.ItemsListMovie;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -23,7 +24,10 @@ public class Move_Movie_Detail extends AppCompatActivity {
     private TextView tvJudul, tvOverview, tvReleaseDate, tvRating;
     private ImageView imgPoster, imgFavorite;
 
-
+//
+//    private Boolean isFavorite = false;
+//    private MovieFavoriteHelper favoriteHelper;
+//    private ItemsListMovie itemsMovie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,21 @@ public class Move_Movie_Detail extends AppCompatActivity {
         String imageview = getIntent().getStringExtra(EXTRA_POSTER_JPG);
         String release_date = getIntent().getStringExtra(EXTRA_RELEASE_DATE);
         String rating = getIntent().getStringExtra(EXTRA_RATE);
+
+//        int id = getIntent().getIntExtra(EXTRA_ID, 0);
+//        String title = getIntent().getStringExtra(EXTRA_TITLE);
+//        String description = getIntent().getStringExtra(EXTRA_OVERVIEW);
+//        String imageview = getIntent().getStringExtra(EXTRA_POSTER_JPG);
+//        String release_date = getIntent().getStringExtra(EXTRA_RELEASE_DATE);
+//        String rating = getIntent().getStringExtra(EXTRA_RATE);
+//
+//        itemsMovie = new ItemsListMovie();
+//        itemsMovie.setId_movie(id);
+//        itemsMovie.setTitle_movie(title);
+//        itemsMovie.setDescription_movie(description);
+//        itemsMovie.setImage_movie(imageview);
+//        itemsMovie.setRealese_movie(release_date);
+//        itemsMovie.setRate_movie(rating);
 
 
         SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
