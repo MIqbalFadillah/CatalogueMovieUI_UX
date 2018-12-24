@@ -87,7 +87,7 @@ public class AdapterMovies extends BaseAdapter {
 
         holder.tvTitle.setText(mData.get(position).getTitle_movie());
         holder.tvDeskripsi.setText(mData.get(position).getDescription_movie());
-        holder.tvRate.setText(mData.get(position).getRate_movie()+" SCORE");
+        holder.tvRate.setText(mData.get(position).getRate_movie());
         String getDate = mData.get(position).getRealese_movie();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

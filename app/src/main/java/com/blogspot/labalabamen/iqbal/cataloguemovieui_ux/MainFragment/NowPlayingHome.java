@@ -84,6 +84,7 @@ public class NowPlayingHome extends Fragment {
                         ItemsListMovie movies = new ItemsListMovie();
 
                         JSONObject data = array.getJSONObject(i);
+                        movies.setId_movie(data.getInt("id"));
                         movies.setTitle_movie(data.getString("title"));
                         movies.setDescription_movie(data.getString("overview"));
                         movies.setRealese_movie(data.getString("release_date"));

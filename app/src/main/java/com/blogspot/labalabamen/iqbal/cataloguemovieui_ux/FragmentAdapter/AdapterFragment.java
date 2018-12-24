@@ -29,7 +29,6 @@ import java.util.List;
 public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHolder> {
     private List<ItemsListMovie> movieListFragment;
     private Context context;
-    static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
 
     public AdapterFragment(List<ItemsListMovie> movieListFragment, Context context){
@@ -42,41 +41,41 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
         notifyDataSetChanged();
     }
 
-    public void addItem(final ItemsListMovie item){
-        movieListFragment.add(item);
-        notifyDataSetChanged();
-    }
-
-    public void clearData(){
-        movieListFragment.clear();
-    }
-
-
-    public int getCount() {
-        if(movieListFragment == null) return 0;
-        return movieListFragment. size();
-
-    }
-
-
-    public ItemsListMovie getItem(int position) {
-        return movieListFragment.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
-    }
+//    public void addItem(final ItemsListMovie item){
+//        movieListFragment.add(item);
+//        notifyDataSetChanged();
+//    }
+//
+//    public void clearData(){
+//        movieListFragment.clear();
+//    }
+//
+//
+//    public int getCount() {
+//        if(movieListFragment == null) return 0;
+//        return movieListFragment. size();
+//
+//    }
 
 
-    public int getViewTypeCount() {
-        return 1;
-    }
+//    public ItemsListMovie getItem(int position) {
+//        return movieListFragment.get(position);
+//    }
+//
+//    @Override
+//    public long getItemId(int position) {
+//        return position;
+//    }
+//
+//    @Override
+//    public int getItemViewType(int position) {
+//        return 0;
+//    }
+//
+//
+//    public int getViewTypeCount() {
+//        return 1;
+//    }
 
 
     @NonNull
@@ -126,14 +125,13 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
             @Override
             public void onClick(View v) {
                 ItemsListMovie movie_list = movieListFragment.get(position);
-
-                ItemsListMovie movieList = movieListFragment.get(position);
                 Intent Intent = new Intent(context, DetailHome.class);
-                Intent.putExtra(DetailHome.EXTRA_TITLE, movieList.getTitle_movie());
-                Intent.putExtra(DetailHome.EXTRA_OVERVIEW, movieList.getDescription_movie());
-                Intent.putExtra(DetailHome.EXTRA_POSTER_JPG, movieList.getImage_movie());
-                Intent.putExtra(DetailHome.EXTRA_RELEASE_DATE, movieList.getRealese_movie());
-                Intent.putExtra(DetailHome.EXTRA_RATE, movieList.getRate_movie());
+                Intent.putExtra(DetailHome.EXTRA_ID, movie_list.getId_movie());
+                Intent.putExtra(DetailHome.EXTRA_TITLE, movie_list.getTitle_movie());
+                Intent.putExtra(DetailHome.EXTRA_OVERVIEW, movie_list.getDescription_movie());
+                Intent.putExtra(DetailHome.EXTRA_POSTER_JPG, movie_list.getImage_movie());
+                Intent.putExtra(DetailHome.EXTRA_RELEASE_DATE, movie_list.getRealese_movie());
+                Intent.putExtra(DetailHome.EXTRA_RATE, movie_list.getRate_movie());
                 context.startActivity(Intent);
 
             }

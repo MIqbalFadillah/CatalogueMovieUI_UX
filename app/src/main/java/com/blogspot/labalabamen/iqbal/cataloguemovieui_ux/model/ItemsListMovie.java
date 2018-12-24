@@ -27,14 +27,14 @@ public class ItemsListMovie implements Parcelable {
 
     public ItemsListMovie(JSONObject object) {
         try {
+            int id = object.getInt("id");
             String title = object.getString("title");
             String description = object.getString("overview");
-            String language = object.getString("original_language");
             String realase = object.getString("release_date");
             String rate = object.getString("vote_average");
             String image = object.getString("poster_path");
 
-
+            this.id_movie = id;
             this.title_movie = title;
             this.description_movie = description;
             this.rate_movie = rate;
@@ -108,12 +108,12 @@ public class ItemsListMovie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id_movie);
-        dest.writeString(title_movie);
-        dest.writeString(description_movie);
-        dest.writeString(image_movie);
-        dest.writeString(rate_movie);
-        dest.writeString(realese_movie);
+        dest.writeInt(this.id_movie);
+        dest.writeString(this.title_movie);
+        dest.writeString(this.description_movie);
+        dest.writeString(this.image_movie);
+        dest.writeString(this.rate_movie);
+        dest.writeString(this.realese_movie);
 
     }
 

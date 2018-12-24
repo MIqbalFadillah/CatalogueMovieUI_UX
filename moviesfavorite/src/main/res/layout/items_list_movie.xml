@@ -50,7 +50,7 @@
                 android:layout_toRightOf="@id/imageView"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="@string/title" />
+                tools:text="@string/rate" />
 
 
             <TextView

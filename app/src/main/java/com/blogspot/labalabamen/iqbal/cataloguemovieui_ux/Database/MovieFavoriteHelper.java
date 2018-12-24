@@ -10,6 +10,7 @@ import static android.provider.BaseColumns._ID;
 import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.TABLE_NAME;
 
 public class MovieFavoriteHelper {
+
     private static String DATABASE_TABLE = TABLE_NAME;
     private Context context;
     private DatabaseHelper dbHelper;
@@ -38,7 +39,7 @@ public class MovieFavoriteHelper {
                 ,null
                 ,null
                 ,null
-                ,null);
+                , null);
     }
     public Cursor queryProvider(){
         return database.query(DATABASE_TABLE

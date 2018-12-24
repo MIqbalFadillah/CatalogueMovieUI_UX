@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+
 public class DatabaseContract {
     public static String TABLE_NAME = "T_favorite_movie";
 
@@ -17,7 +18,7 @@ public class DatabaseContract {
     public static final class FavoriteField implements BaseColumns {
 
 
-//        public static String FIELD_ID             = "_id";
+        public static String FIELD_ID             = "_id";
         public static String FIELD_TITLE          = "title";
         public static String FIELD_POSTER         = "poster";
         public static String FIELD_RELEASE_DATE   = "release_date";

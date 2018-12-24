@@ -29,7 +29,7 @@ public class FavoriteProvider extends ContentProvider {
 
 
         sUriMatcher.addURI(AUTHORITY,
-                TABLE_NAME + "/#",
+                TABLE_NAME+ "/#",
                 FAVORITE_ID);
     }
 
@@ -118,7 +118,7 @@ public class FavoriteProvider extends ContentProvider {
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String s, @Nullable String[] strings) {
         int updated;
         switch (sUriMatcher.match(uri)) {
             case FAVORITE_ID:

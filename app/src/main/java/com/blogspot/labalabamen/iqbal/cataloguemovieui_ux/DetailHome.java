@@ -11,10 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.FavoriteField;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.*;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.MovieFavoriteHelper;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.squareup.picasso.Picasso;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField;
+//import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +25,7 @@ import java.util.Date;
 import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.CONTENT_URI;
 
 public class DetailHome extends AppCompatActivity {
-    public static String EXTRA_MOVE = "extra_move";
+//    public static String EXTRA_MOVE = "extra_move";
 
     public static String EXTRA_ID        = "extra_id";
     public static String EXTRA_TITLE        = "extra_title";
@@ -138,7 +140,7 @@ public class DetailHome extends AppCompatActivity {
 
     private void FavSave(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(FavoriteField._ID,itemsMovie.getId_movie());
+        contentValues.put(FavoriteField.FIELD_ID,itemsMovie.getId_movie());
         contentValues.put(FavoriteField.FIELD_TITLE,itemsMovie.getTitle_movie());
         contentValues.put(FavoriteField.FIELD_POSTER,itemsMovie.getImage_movie());
         contentValues.put(FavoriteField.FIELD_RELEASE_DATE,itemsMovie.getRealese_movie());
