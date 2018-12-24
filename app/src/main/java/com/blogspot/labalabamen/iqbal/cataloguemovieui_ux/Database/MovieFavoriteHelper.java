@@ -31,7 +31,8 @@ public class MovieFavoriteHelper {
     }
 
     public Cursor queryByIdProvider(String id){
-        return database.query(DATABASE_TABLE, null
+        return database.query(DATABASE_TABLE
+                ,null
                 ,_ID + " = ?"
                 ,new String[]{id}
                 ,null
@@ -39,7 +40,6 @@ public class MovieFavoriteHelper {
                 ,null
                 ,null);
     }
-
     public Cursor queryProvider(){
         return database.query(DATABASE_TABLE
                 ,null

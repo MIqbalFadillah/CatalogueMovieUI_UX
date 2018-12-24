@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MoviesFavorite</string>
+    <string name="score">%s/10 Score</string>
+
+
+    <string name="description">Deskripsi</string>
+    <string name="date">Release</string>
+    <string name="title">title</string>
+    <string name="rate">Rate</string>
+    <string name="share">Share</string>
+
+</resources>

@@ -20,13 +20,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_NAME,
-            DatabaseContract.FavoriteField.FIELD_ID,
+//            DatabaseContract.FavoriteField.FIELD_ID,
+            DatabaseContract.FavoriteField._ID,
             DatabaseContract.FavoriteField.FIELD_TITLE,
             DatabaseContract.FavoriteField.FIELD_POSTER,
             DatabaseContract.FavoriteField.FIELD_RATE,
             DatabaseContract.FavoriteField.FIELD_RELEASE_DATE,
             DatabaseContract.FavoriteField.FIELD_OVERVIEW
     );
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -35,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_NAME);
         onCreate(db);
 

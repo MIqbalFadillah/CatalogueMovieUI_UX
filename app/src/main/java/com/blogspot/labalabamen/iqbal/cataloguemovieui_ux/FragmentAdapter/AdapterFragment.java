@@ -9,14 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.CustomOnItemClickListener;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.DetailHome;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -25,22 +27,22 @@ import java.util.Date;
 import java.util.List;
 
 public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHolder> {
-    private List<ItemsMovieFragment> movieListFragment;
+    private List<ItemsListMovie> movieListFragment;
     private Context context;
     static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
 
-    public AdapterFragment(List<ItemsMovieFragment> movieListFragment, Context context){
+    public AdapterFragment(List<ItemsListMovie> movieListFragment, Context context){
         this.movieListFragment = movieListFragment;
         this.context = context;
     }
 
-    public void setData(ArrayList<ItemsMovieFragment> items){
+    public void setData(ArrayList<ItemsListMovie> items){
         movieListFragment = items;
         notifyDataSetChanged();
     }
 
-    public void addItem(final ItemsMovieFragment item){
+    public void addItem(final ItemsListMovie item){
         movieListFragment.add(item);
         notifyDataSetChanged();
     }
@@ -57,7 +59,7 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
     }
 
 
-    public ItemsMovieFragment getItem(int position) {
+    public ItemsListMovie getItem(int position) {
         return movieListFragment.get(position);
     }
 
@@ -88,7 +90,7 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        final ItemsMovieFragment movieFragment = movieListFragment.get(position);
+        final ItemsListMovie movieFragment = movieListFragment.get(position);
         holder.title.setText(movieFragment.getTitle_movie());
 
         holder.rate.setText(movieFragment.getRate_movie());
@@ -123,9 +125,9 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
         holder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemsMovieFragment movie_list = movieListFragment.get(position);
+                ItemsListMovie movie_list = movieListFragment.get(position);
 
-                ItemsMovieFragment movieList = movieListFragment.get(position);
+                ItemsListMovie movieList = movieListFragment.get(position);
                 Intent Intent = new Intent(context, DetailHome.class);
                 Intent.putExtra(DetailHome.EXTRA_TITLE, movieList.getTitle_movie());
                 Intent.putExtra(DetailHome.EXTRA_OVERVIEW, movieList.getDescription_movie());
@@ -148,6 +150,7 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
         public TextView title, overview, date, rate;
         public ImageView imgMovie;
         public Button btnDetail, btnShare;
+        public LinearLayout cvDetail;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -159,6 +162,7 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
             date        = (TextView) itemView.findViewById(R.id.tv_item_date);
             btnShare    = (Button) itemView.findViewById(R.id.btn_set_share);
             btnDetail = (Button) itemView.findViewById(R.id.btn_set_detail);
+
         }
     }
 }

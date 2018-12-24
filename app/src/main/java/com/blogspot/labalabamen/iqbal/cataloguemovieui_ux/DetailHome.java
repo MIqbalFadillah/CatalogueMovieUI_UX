@@ -1,6 +1,7 @@
-package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment;
+package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -11,14 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.MovieFavoriteHelper;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.ItemsMovie;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter.AdapterFavorite;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter.ItemsMovieFragment;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.squareup.picasso.Picasso;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.FavoriteField;
 
-import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +23,7 @@ import java.util.Date;
 import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.CONTENT_URI;
 
 public class DetailHome extends AppCompatActivity {
+    public static String EXTRA_MOVE = "extra_move";
 
     public static String EXTRA_ID        = "extra_id";
     public static String EXTRA_TITLE        = "extra_title";
@@ -35,23 +33,27 @@ public class DetailHome extends AppCompatActivity {
     public static String EXTRA_RATE         = "extra_rate";
 
     private TextView tvJudul, tvOverview, tvReleaseDate, tvRating;
-    private ImageView imgPoster;
+    private ImageView imgPoster, imgFavorite;
 
 
     private Boolean isFavorite = false;
     private MovieFavoriteHelper favoriteHelper;
-    private ItemsMovieFragment itemsMovie;
+    private ItemsListMovie itemsMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_home);
 
+        Intent intent = getIntent();
+        ItemsListMovie move_movie = intent.getParcelableExtra("MOVE_MOVIE");
+
         tvJudul = (TextView)findViewById(R.id.home_TvJudul_recieve);
         tvOverview = (TextView)findViewById(R.id.home_TvDesc_recieve);
         tvReleaseDate = (TextView)findViewById(R.id.home_TvRealese_recieve);
         tvRating = (TextView)findViewById(R.id.home_TvRate_recieve);
         imgPoster = (ImageView)findViewById(R.id.home_Poster_Movie);
+        imgFavorite = (ImageView)findViewById(R.id.img_item_favorite);
 
         int id = getIntent().getIntExtra(EXTRA_ID, 0);
         String title = getIntent().getStringExtra(EXTRA_TITLE);
@@ -60,7 +62,7 @@ public class DetailHome extends AppCompatActivity {
         String release_date = getIntent().getStringExtra(EXTRA_RELEASE_DATE);
         String rating = getIntent().getStringExtra(EXTRA_RATE);
 
-        itemsMovie = new ItemsMovieFragment();
+        itemsMovie = new ItemsListMovie();
         itemsMovie.setId_movie(id);
         itemsMovie.setTitle_movie(title);
         itemsMovie.setDescription_movie(description);
@@ -89,7 +91,7 @@ public class DetailHome extends AppCompatActivity {
 
         loadDataFavorite();
 
-        imgPoster.setOnClickListener(new View.OnClickListener() {
+        imgFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isFavorite){
@@ -128,15 +130,15 @@ public class DetailHome extends AppCompatActivity {
 
     private void FavChangeColor(){
         if (isFavorite){
-            imgPoster.setImageResource(R.drawable.baseline_favorite_black_18dp);
+            imgFavorite.setImageResource(R.drawable.ic_favorite_red);
         }else {
-            imgPoster.setImageResource(R.drawable.baseline_favorite_border_black_18dp);
+            imgFavorite.setImageResource(R.drawable.ic_favorite_border_red);
         }
     }
 
     private void FavSave(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(FavoriteField.FIELD_ID,itemsMovie.getId_movie());
+        contentValues.put(FavoriteField._ID,itemsMovie.getId_movie());
         contentValues.put(FavoriteField.FIELD_TITLE,itemsMovie.getTitle_movie());
         contentValues.put(FavoriteField.FIELD_POSTER,itemsMovie.getImage_movie());
         contentValues.put(FavoriteField.FIELD_RELEASE_DATE,itemsMovie.getRealese_movie());

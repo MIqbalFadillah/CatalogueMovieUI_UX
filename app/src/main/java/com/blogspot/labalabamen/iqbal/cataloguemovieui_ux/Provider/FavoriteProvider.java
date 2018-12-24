@@ -19,7 +19,6 @@ public class FavoriteProvider extends ContentProvider {
     private static final int FAVORITE       = 100;
     private static final int FAVORITE_ID    = 101;
 
-//    private MovieFavoriteHelper favoriteHelper;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -30,7 +29,7 @@ public class FavoriteProvider extends ContentProvider {
 
 
         sUriMatcher.addURI(AUTHORITY,
-                TABLE_NAME+ "/#",
+                TABLE_NAME + "/#",
                 FAVORITE_ID);
     }
 
@@ -46,7 +45,7 @@ public class FavoriteProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable  String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
         Cursor cursor;
         switch (sUriMatcher.match(uri)) {
             case FAVORITE:
@@ -78,9 +77,10 @@ public class FavoriteProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
 
         long added;
+
         switch (sUriMatcher.match(uri)) {
             case FAVORITE:
                 added = favoriteHelper.insertProvider(values);

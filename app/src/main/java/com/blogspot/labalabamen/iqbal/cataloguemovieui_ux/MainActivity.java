@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.SearchMovie;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.FavoriteHome;
 import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity
 
         }
          else if (id == R.id.nav_favorite) {
+            title = getResources().getString(R.string.favorit);
+            fragment = new FavoriteHome();
 
         } else if (id == R.id.nav_manage) {
 

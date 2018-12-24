@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 import com.squareup.picasso.Picasso;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AdapterMovies extends BaseAdapter {
-    private ArrayList<ItemsMovie> mData = new ArrayList<>();
+    private ArrayList<ItemsListMovie> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private Context context;
 
@@ -26,12 +27,12 @@ public class AdapterMovies extends BaseAdapter {
     }
 
 
-    public void setData(ArrayList<ItemsMovie> items){
+    public void setData(ArrayList<ItemsListMovie> items){
         mData = items;
         notifyDataSetChanged();
     }
 
-    public void addItem(final ItemsMovie item){
+    public void addItem(final ItemsListMovie item){
         mData.add(item);
         notifyDataSetChanged();
     }
@@ -48,7 +49,7 @@ public class AdapterMovies extends BaseAdapter {
     }
 
     @Override
-    public ItemsMovie getItem(int position) {
+    public ItemsListMovie getItem(int position) {
         return mData.get(position);
     }
 

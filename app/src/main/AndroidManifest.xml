@@ -28,8 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Move_Movie_Detail" />
-        <activity android:name=".MainFragment.DetailHome"></activity>
+        <activity android:name=".DetailHome"></activity>
         <provider
             android:name="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Provider.FavoriteProvider"
             android:authorities="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux"

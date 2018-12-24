@@ -1,10 +1,8 @@
-package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter;
+package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model;
 
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.ItemsMovie;
 
 import org.json.JSONObject;
 
@@ -17,7 +15,7 @@ import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.Databa
 import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.getFieldInt;
 import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.getFieldString;
 
-public class ItemsMovieFragment implements Parcelable {
+public class ItemsListMovie implements Parcelable {
 
     private int id_movie;
     private String title_movie;
@@ -25,57 +23,35 @@ public class ItemsMovieFragment implements Parcelable {
     private String image_movie;
     private String rate_movie;
     private String realese_movie;
-//    private String language_movie;
 
-//    public ItemsMovieFragment(JSONObject object) {
-//        try {
-//            String title = object.getString("title");
-//            String description = object.getString("overview");
-//            String language = object.getString("original_language");
-//            String realase = object.getString("release_date");
-//            String rate = object.getString("vote_average");
-//            String image = object.getString("poster_path");
-//
-//
-//            this.title_movie = title;
-//            this.description_movie = description;
-//            this.rate_movie = rate;
-//            this.image_movie = image;
-//            this.realese_movie = realase;
-//            this.language_movie = language;
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
-    public ItemsMovieFragment() {
+    public ItemsListMovie(JSONObject object) {
+        try {
+            String title = object.getString("title");
+            String description = object.getString("overview");
+            String language = object.getString("original_language");
+            String realase = object.getString("release_date");
+            String rate = object.getString("vote_average");
+            String image = object.getString("poster_path");
+
+
+            this.title_movie = title;
+            this.description_movie = description;
+            this.rate_movie = rate;
+            this.image_movie = image;
+            this.realese_movie = realase;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ItemsListMovie() {
 
     }
 
 
-    protected ItemsMovieFragment(Parcel in) {
-        id_movie = in.readInt();
-        title_movie = in.readString();
-        description_movie = in.readString();
-        image_movie = in.readString();
-        rate_movie = in.readString();
-        realese_movie = in.readString();
-//        language_movie = in.readString();
-    }
-
-    public static final Creator<ItemsMovieFragment> CREATOR = new Creator<ItemsMovieFragment>() {
-        @Override
-        public ItemsMovieFragment createFromParcel(Parcel in) {
-            return new ItemsMovieFragment(in);
-        }
-
-        @Override
-        public ItemsMovieFragment[] newArray(int size) {
-            return new ItemsMovieFragment[size];
-        }
-    };
     public int getId_movie() {
         return id_movie;
     }
@@ -124,15 +100,6 @@ public class ItemsMovieFragment implements Parcelable {
         this.realese_movie = realese_movie;
     }
 
-//    public String getLanguage_movie() {
-//        return language_movie;
-//    }
-//
-//    public void setLanguage_movie(String language_movie) {
-//        this.language_movie = language_movie;
-//    }
-
-
 
     @Override
     public int describeContents() {
@@ -147,10 +114,10 @@ public class ItemsMovieFragment implements Parcelable {
         dest.writeString(image_movie);
         dest.writeString(rate_movie);
         dest.writeString(realese_movie);
-//        dest.writeString(language_movie);
+
     }
 
-    public ItemsMovieFragment(Cursor cursor){ //untuk Content Provider
+    public ItemsListMovie(Cursor cursor){ //untuk Content Provider
         this.id_movie             = getFieldInt(cursor, _ID);
         this.title_movie          = getFieldString(cursor, FIELD_TITLE);
         this.image_movie          = getFieldString(cursor, FIELD_POSTER);
@@ -158,5 +125,26 @@ public class ItemsMovieFragment implements Parcelable {
         this.rate_movie           = getFieldString(cursor, FIELD_RATE);
         this.description_movie    = getFieldString(cursor, FIELD_OVERVIEW);
     }
+
+    protected ItemsListMovie(Parcel in) {
+        this.id_movie = in.readInt();
+        this.title_movie = in.readString();
+        this.description_movie = in.readString();
+        this.image_movie = in.readString();
+        this.rate_movie = in.readString();
+        this.realese_movie = in.readString();
+    }
+
+    public static final Creator<ItemsListMovie> CREATOR = new Creator<ItemsListMovie>() {
+        @Override
+        public ItemsListMovie createFromParcel(Parcel source) {
+            return new ItemsListMovie(source);
+        }
+
+        @Override
+        public ItemsListMovie[] newArray(int size) {
+            return new ItemsListMovie[size];
+        }
+    };
 
 }

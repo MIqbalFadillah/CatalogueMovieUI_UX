@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,9 +20,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.BuildConfig;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.ItemsMovie;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter.AdapterFragment;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter.ItemsMovieFragment;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 
 import org.json.JSONArray;
@@ -31,7 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +37,7 @@ public class NowPlayingHome extends Fragment {
     private RecyclerView rvCategory;
     private RecyclerView.Adapter adapter;
     private View view;
-    private ArrayList<ItemsMovieFragment> ListMovie;
+    private ArrayList<ItemsListMovie> ListMovie;
     private Button btnDetail;
 
     private static final String API_URL = BuildConfig.MOVIE_URL+"/now_playing?api_key="+BuildConfig.API_KEY+"&language=en-US";
@@ -84,7 +81,7 @@ public class NowPlayingHome extends Fragment {
                     JSONArray array = jsonObject.getJSONArray("results");
                     for (int i = 0; i < array.length(); i++){
 
-                        ItemsMovieFragment movies = new ItemsMovieFragment();
+                        ItemsListMovie movies = new ItemsListMovie();
 
                         JSONObject data = array.getJSONObject(i);
                         movies.setTitle_movie(data.getString("title"));

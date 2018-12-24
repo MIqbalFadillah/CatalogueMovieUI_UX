@@ -1,6 +1,7 @@
 package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.BuildConfig;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
 
@@ -15,8 +16,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLoader<ArrayList<ItemsMovie>> {
-    private ArrayList<ItemsMovie> mData;
+public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLoader<ArrayList<ItemsListMovie>> {
+    private ArrayList<ItemsListMovie> mData;
     private boolean mHasResult = false;
     private String mTitleMovie;
 
@@ -37,7 +38,7 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
     }
 
     @Override
-    public void deliverResult(final ArrayList<ItemsMovie> data) {
+    public void deliverResult(final ArrayList<ItemsListMovie> data) {
         mData = data;
         mHasResult = true;
         super.deliverResult(data);
@@ -55,10 +56,10 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
     }
 
     @Override
-    public ArrayList<ItemsMovie> loadInBackground() {
+    public ArrayList<ItemsListMovie> loadInBackground() {
         SyncHttpClient client = new SyncHttpClient();
 
-        final ArrayList<ItemsMovie> ItemsesMovie = new ArrayList<>();
+        final ArrayList<ItemsListMovie> ItemsesMovie = new ArrayList<>();
         String url = BuildConfig.MOVIE_SEARCH+"?api_key="+BuildConfig.API_KEY+"&language=en-US&query="+mTitleMovie;
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -77,7 +78,7 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
                     for (int i = 0 ; i < list.length() ; i++){
 
                             JSONObject movie = list.getJSONObject(i);
-                        ItemsMovie movie_item = new ItemsMovie(movie);
+                        ItemsListMovie movie_item = new ItemsListMovie(movie);
                         ItemsesMovie.add(movie_item);
 
                     }
@@ -100,6 +101,6 @@ public class MovieAsyncTaskLoader extends android.support.v4.content.AsyncTaskLo
         return ItemsesMovie;
     }
 
-    private void onReleaseResources(ArrayList<ItemsMovie> mData) {
+    private void onReleaseResources(ArrayList<ItemsListMovie> mData) {
     }
 }

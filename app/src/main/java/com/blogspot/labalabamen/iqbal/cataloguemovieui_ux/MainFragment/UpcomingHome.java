@@ -19,7 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.BuildConfig;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter.AdapterFragment;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter.ItemsMovieFragment;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 
 import org.json.JSONArray;
@@ -36,7 +36,7 @@ public class UpcomingHome extends Fragment {
     private RecyclerView rvCategory;
     private RecyclerView.Adapter adapter;
     private View view;
-    private List<ItemsMovieFragment> ListMovie;
+    private List<ItemsListMovie> ListMovie;
 
     private static final String API_URL = BuildConfig.MOVIE_URL+"/upcoming?api_key="+BuildConfig.API_KEY+"&language=en-US";
 
@@ -79,7 +79,7 @@ public class UpcomingHome extends Fragment {
                     JSONArray array = jsonObject.getJSONArray("results");
                     for (int i = 0; i < array.length(); i++){
 
-                        ItemsMovieFragment movies = new ItemsMovieFragment();
+                        ItemsListMovie movies = new ItemsListMovie();
 
                         JSONObject data = array.getJSONObject(i);
                         movies.setTitle_movie(data.getString("title"));

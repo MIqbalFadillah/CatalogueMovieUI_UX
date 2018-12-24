@@ -57,8 +57,27 @@ public class FavoriteHome extends Fragment {
         return view;
 
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastMessageShow("Favorite on onDestroy");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new loadFavAsync().execute();
+        ToastMessageShow("Favorite on onResume");
+    }
 
     private class loadFavAsync extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            ToastMessageShow("Favorite on onPreExe");
+        }
 
         @Override
         protected Cursor doInBackground(Void... voids) {
@@ -72,14 +91,7 @@ public class FavoriteHome extends Fragment {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-            ToastMessageShow("Favorite on onPreExe");
-        }
-
-    @Override
-    protected void onPostExecute(Cursor cursor) {
+        protected void onPostExecute(Cursor cursor) {
         super.onPostExecute(cursor);
         progressBar.setVisibility(View.GONE);
         ToastMessageShow("Favorite on onPostExe");
@@ -92,24 +104,12 @@ public class FavoriteHome extends Fragment {
         if (list.getCount() == 0) {
             ToastMessageShow("Tidak ada data saat ini");
         } else {
-            ToastMessageShow("Total list: " + list.getCount());
+            ToastMessageShow("Total list: "+list.getCount());
         }
     }
 
 }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ToastMessageShow("Favorite on onDestroy");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        new loadFavAsync().execute();
-        ToastMessageShow("Favorite on onResume");
-    }
 
     private void ToastMessageShow(String message){
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

@@ -3,20 +3,20 @@ package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.FragmentAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.CustomOnItemClickListener;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.ItemsMovie;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.DetailHome;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -36,19 +36,17 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
         this.list = list;
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_movie_fragment, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder( final ViewHolder holder, final int position) {
+        final ItemsListMovie movieFragment = getItem(position);
 
-        final ItemsMovieFragment movieFragment = getItem(position);
         holder.title.setText(movieFragment.getTitle_movie());
-
         holder.rate.setText(movieFragment.getRate_movie());
         holder.overview.setText(movieFragment.getDescription_movie());
 
@@ -81,8 +79,8 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
         holder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ItemsMovieFragment movie_list = movieListFragment.get(position);
-//                ItemsMovieFragment movieList = movieListFragment.get(position);
+//                ItemsListMovie movie_list = movieListFragment.get(position);
+//                ItemsListMovie movieList = movieListFragment.get(position);
 
                 Intent Intent = new Intent(holder.itemView.getContext(), DetailHome.class);
                 Intent.putExtra(DetailHome.EXTRA_ID, movieFragment.getId_movie());
@@ -91,7 +89,7 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
                 Intent.putExtra(DetailHome.EXTRA_POSTER_JPG, movieFragment.getImage_movie());
                 Intent.putExtra(DetailHome.EXTRA_RELEASE_DATE, movieFragment.getRealese_movie());
                 Intent.putExtra(DetailHome.EXTRA_RATE, movieFragment.getRate_movie());
-                context.startActivity(Intent);
+                holder.itemView.getContext().startActivity(Intent);
 
             }
         });
@@ -100,14 +98,15 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (list == null) return 0;
+        return list.getCount();
     }
 
-    private ItemsMovieFragment getItem(int position){
+    private ItemsListMovie getItem(int position){
         if (!list.moveToPosition(position)) {
             throw new IllegalStateException("Position invalid");
         }
-        return new ItemsMovieFragment(list);
+        return new ItemsListMovie(list);
     }
 
 
@@ -115,8 +114,9 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
         public TextView title, overview, date, rate;
         public ImageView imgMovie;
         public Button btnDetail, btnShare;
+        public LinearLayout cvDetail;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
 
             rate = (TextView)itemView.findViewById(R.id.tv_item_rate);
@@ -126,6 +126,7 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
             date        = (TextView) itemView.findViewById(R.id.tv_item_date);
             btnShare    = (Button) itemView.findViewById(R.id.btn_set_share);
             btnDetail = (Button) itemView.findViewById(R.id.btn_set_detail);
+            cvDetail = (LinearLayout)itemView.findViewById(R.id.cr_movies);
         }
     }
 

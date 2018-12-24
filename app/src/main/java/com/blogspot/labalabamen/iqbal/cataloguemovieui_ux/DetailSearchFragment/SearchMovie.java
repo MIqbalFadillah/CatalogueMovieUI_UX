@@ -16,7 +16,8 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Move_Movie_Detail;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class SearchMovie extends Fragment implements LoaderManager.LoaderCallbacks
-        <ArrayList<ItemsMovie>>, AdapterView.OnItemClickListener {
+        <ArrayList<ItemsListMovie>>{
     ListView listView;
     AdapterMovies adapter;
     Button btnCari;
@@ -51,7 +52,23 @@ public class SearchMovie extends Fragment implements LoaderManager.LoaderCallbac
 
         listView = (ListView) view.findViewById(R.id.lsMovie);
         listView.setAdapter((ListAdapter) adapter);
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ItemsListMovie movieFragment = (ItemsListMovie) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(getActivity(), DetailHome.class);
+
+                intent.putExtra(DetailHome.EXTRA_ID, movieFragment.getId_movie());
+                intent.putExtra(DetailHome.EXTRA_TITLE, movieFragment.getTitle_movie());
+                intent.putExtra(DetailHome.EXTRA_OVERVIEW, movieFragment.getDescription_movie());
+                intent.putExtra(DetailHome.EXTRA_POSTER_JPG, movieFragment.getImage_movie());
+                intent.putExtra(DetailHome.EXTRA_RELEASE_DATE, movieFragment.getRealese_movie());
+                intent.putExtra(DetailHome.EXTRA_RATE, movieFragment.getRate_movie());
+
+                startActivity(intent);
+            }
+        });
 
         editJudul = (EditText) view.findViewById(R.id.edt_cari);
         btnCari = (Button) view.findViewById(R.id.btn_cari);
@@ -70,7 +87,7 @@ public class SearchMovie extends Fragment implements LoaderManager.LoaderCallbac
 
     @NonNull
     @Override
-    public android.support.v4.content.Loader<ArrayList<ItemsMovie>> onCreateLoader(int i, @Nullable Bundle bundle) {
+    public android.support.v4.content.Loader<ArrayList<ItemsListMovie>> onCreateLoader(int i, @Nullable Bundle bundle) {
         String kumpulanMovie = "";
         if (bundle != null) {
             kumpulanMovie = bundle.getString(EXTRA_MOVIE);
@@ -79,12 +96,12 @@ public class SearchMovie extends Fragment implements LoaderManager.LoaderCallbac
     }
 
     @Override
-    public void onLoadFinished(@NonNull android.support.v4.content.Loader<ArrayList<ItemsMovie>> loader, ArrayList<ItemsMovie> itemsMovies) {
-        adapter.setData(itemsMovies);
+    public void onLoadFinished(@NonNull android.support.v4.content.Loader<ArrayList<ItemsListMovie>> loader, ArrayList<ItemsListMovie> itemsMovieFragments) {
+        adapter.setData(itemsMovieFragments);
     }
 
     @Override
-    public void onLoaderReset(@NonNull android.support.v4.content.Loader<ArrayList<ItemsMovie>> loader) {
+    public void onLoaderReset(@NonNull android.support.v4.content.Loader<ArrayList<ItemsListMovie>> loader) {
         adapter.setData(null);
 
     }
@@ -103,12 +120,12 @@ public class SearchMovie extends Fragment implements LoaderManager.LoaderCallbac
         }
     };
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ItemsMovie move_item = (ItemsMovie) parent.getItemAtPosition(position);
-        Intent intent = new Intent(getActivity(), Move_Movie_Detail.class);
-        intent.putExtra("MOVE_MOVIE", move_item);
-
-        startActivity(intent);
-    }
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        ItemsListMovie move_item = (ItemsListMovie) parent.getItemAtPosition(position);
+//        Intent intent = new Intent(getActivity(), DetailHome.class);
+//        intent.putExtra("MOVE_MOVIE", move_item);
+//
+//        startActivity(intent);
+//    }
 }
