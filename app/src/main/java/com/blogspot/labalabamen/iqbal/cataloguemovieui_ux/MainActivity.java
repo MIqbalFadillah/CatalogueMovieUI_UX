@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailSearchFragment.SearchMovie;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.MainFragment.FavoriteHome;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.utils.SettingsPrefernces;
 import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -124,8 +125,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             if (item.getItemId() == R.id.action_settings){
-                Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                Intent mIntent = new Intent(this, SettingsPrefernces.class);
                 startActivity(mIntent);
+                return true;
             }
         }
 
@@ -157,9 +159,9 @@ public class MainActivity extends AppCompatActivity
             fragment = new FavoriteHome();
 
         } else if (id == R.id.nav_manage) {
-            title = getResources().getString(R.string.action_settings);
-            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            Intent mIntent = new Intent(this, SettingsPrefernces.class);
             startActivity(mIntent);
+            return true;
 
         }
         setFragment(fragment, title);

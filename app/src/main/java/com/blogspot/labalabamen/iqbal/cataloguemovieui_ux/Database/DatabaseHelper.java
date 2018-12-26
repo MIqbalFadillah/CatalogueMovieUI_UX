@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-//import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.FavoriteField.*;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static int DATABASE_VERSION = 1;

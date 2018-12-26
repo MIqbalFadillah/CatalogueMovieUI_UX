@@ -22,6 +22,25 @@
     <string name="rate">Tingkat</string>
     <string name="share">Bagi</string>
 
+    <string name="empty_text">Tidak Ada Data</string>
+    <string name="appwidget_text">Film Favorit</string>
+
+    <string name="notify_daily">Hello there, Let Check It Out Some Good Movies</string>
+
+    <string name="key_today_reminder">key_today_reminder</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="select_daily_reminder">You will reveiced daily reminder every 8 AM</string>
+    <string name="key_release_reminder">key_release_reminder</string>
+    <string name="select_release_reminder">You will receive daily movie release info every 7 AM</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="lang_title">Language</string>
+    <string name="select_lang">Select language</string>
+    <string name="lang">Language</string>
+    <string name="key_lang">key_lang</string>
+    <string name="notifications">Notifications</string>
+
+
+
     <string name="click_me_to_see_the_awesomeness">Click me to see the Awesomeness!</string>
     <string name="m_iqbal">Muhammad Iqbal Fadillah</string>
     <string name="home">Halaman</string>

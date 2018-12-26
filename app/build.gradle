@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.blogspot.labalabamen.iqbal.cataloguemovieui_ux"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -12,6 +12,7 @@ android {
         buildConfigField "String", "API_KEY", "\"293dc4ce4df06b15d37a7f0c1d13f716\""
         buildConfigField "String", "MOVIE_URL", "\"https://api.themoviedb.org/3/movie\""
         buildConfigField "String", "MOVIE_SEARCH", "\"https://api.themoviedb.org/3/search/movie\""
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
 
@@ -29,12 +30,13 @@ dependencies {
     implementation 'com.android.support:design:28.0.0-alpha1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:support-vector-drawable:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
     implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'me.biubiubiu.justifytext:library:1.1'

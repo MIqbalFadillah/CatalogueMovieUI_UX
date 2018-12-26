@@ -11,6 +11,9 @@
         android:name="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.WRITE_DATABASE"
         android:protectionLevel="normal" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,13 +31,41 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailHome"></activity>
+        <activity android:name=".DetailHome" />
+
         <provider
-            android:name="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Provider.FavoriteProvider"
+            android:name=".Provider.FavoriteProvider"
             android:authorities="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux"
             android:exported="true"
             android:readPermission="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.READ_DATABASE"
-            android:writePermission="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.WRITE_DATABASE"/>
+            android:writePermission="com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.WRITE_DATABASE" />
+
+        <receiver android:name=".StackWidget.FavoriteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".AlertNofication.DailyReminder"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".AlertNofication.UpcomingReminder"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name=".StackWidget.FavoriteWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity
+            android:name=".utils.SettingsPrefernces"
+            android:label="@string/title_activity_settings_prefernces"></activity>
     </application>
 
 </manifest>

@@ -66,17 +66,10 @@ public class MovieHolderView extends RecyclerView.ViewHolder {
             }
         });
 
-//        btnShare.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(itemView.getContext(), "Share: "+item.getMov_title(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
         cvDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ItemsListMovie movie_list = movieListFragment.get(position);
-//                ItemsListMovie movieList = movieListFragment.get(position);
 
                 Intent Intent = new Intent(itemView.getContext(), DetailHome.class);
                 Intent.putExtra(DetailHome.EXTRA_ID, movieFragment.getId_movie());

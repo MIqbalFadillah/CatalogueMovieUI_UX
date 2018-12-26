@@ -41,42 +41,6 @@ public class AdapterFragment extends RecyclerView.Adapter<AdapterFragment.ViewHo
         notifyDataSetChanged();
     }
 
-//    public void addItem(final ItemsListMovie item){
-//        movieListFragment.add(item);
-//        notifyDataSetChanged();
-//    }
-//
-//    public void clearData(){
-//        movieListFragment.clear();
-//    }
-//
-//
-//    public int getCount() {
-//        if(movieListFragment == null) return 0;
-//        return movieListFragment. size();
-//
-//    }
-
-
-//    public ItemsListMovie getItem(int position) {
-//        return movieListFragment.get(position);
-//    }
-//
-//    @Override
-//    public long getItemId(int position) {
-//        return position;
-//    }
-//
-//    @Override
-//    public int getItemViewType(int position) {
-//        return 0;
-//    }
-//
-//
-//    public int getViewTypeCount() {
-//        return 1;
-//    }
-
 
     @NonNull
     @Override
