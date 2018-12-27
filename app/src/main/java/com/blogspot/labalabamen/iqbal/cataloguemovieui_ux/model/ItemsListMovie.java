@@ -146,5 +146,4 @@ public class ItemsListMovie implements Parcelable {
             return new ItemsListMovie[size];
         }
     };
-
 }

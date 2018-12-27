@@ -34,6 +34,7 @@ import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.AlertNofication.DailyR
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.AlertNofication.UpcomingReminder;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.BuildConfig;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemListMovieNotify;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 
 import org.json.JSONArray;
@@ -59,7 +60,8 @@ import java.util.Locale;
  */
 public class SettingsPrefernces extends AppCompatPreferenceActivity {
 
-    private static final String API_URL = BuildConfig.MOVIE_URL+"/upcoming?api_key="+BuildConfig.API_KEY+"&language=en-US";
+    private static final String API_URL = BuildConfig.MOVIE_URL + "/upcoming?api_key=" + BuildConfig.API_KEY + "&language=en-US";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,38 +72,41 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
 
     }
 
-    public static class MainPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener{
+    public static class MainPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
         SwitchPreference switchReminder;
         SwitchPreference switchToday;
 
         DailyReminder dailyReminder = new DailyReminder();
+        UpcomingReminder reminder_upcoming = new UpcomingReminder();
 
-        List<ItemsListMovie>listMovies;
-        List<ItemsListMovie>samelistMovies;
+        List<ItemListMovieNotify> listMovies;
+        List<ItemListMovieNotify> samelistMovies;
 
         @Override
-        public void onCreate(final Bundle savedInstanceState){
-           super.onCreate(savedInstanceState);
-           addPreferencesFromResource(R.xml.pref_notification);
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_notification);
 
 
-           listMovies = new ArrayList<>();
-           samelistMovies = new ArrayList<>();
 
-           switchReminder = (SwitchPreference)findPreference(getString(R.string.key_today_reminder));
-           switchReminder.setOnPreferenceChangeListener(this);
-           switchToday = (SwitchPreference)findPreference(getString(R.string.key_release_reminder));
-           switchToday.setOnPreferenceChangeListener(this);
 
-           Preference preference = findPreference(getString(R.string.key_lang));
-           preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-               @Override
-               public boolean onPreferenceClick(Preference preference) {
-                   startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
-                   return true;
-               }
-           });
+            listMovies = new ArrayList<>();
+            samelistMovies = new ArrayList<>();
+
+            switchReminder = (SwitchPreference) findPreference(getString(R.string.key_today_reminder));
+            switchReminder.setOnPreferenceChangeListener(this);
+            switchToday = (SwitchPreference) findPreference(getString(R.string.key_release_reminder));
+            switchToday.setOnPreferenceChangeListener(this);
+
+            Preference preference = findPreference(getString(R.string.key_lang));
+            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -109,21 +114,24 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
             String key = preference.getKey();
             boolean compare = (boolean) newValue;
 
-            if (key.equals(getString(R.string.key_today_reminder))){
-                if(compare){
+            if (key.equals(getString(R.string.key_today_reminder))) {
+                if (compare) {
                     dailyReminder.setAlarm(getActivity());
-                }else {
+                } else {
                     dailyReminder.CancelAlarm(getActivity());
                 }
-            }else {
-                if (compare){
+            } else {
+                if (compare) {
                     setReleaseAlarm();
+                } else {
+                    reminder_upcoming.cancelAlarm(getActivity());
                 }
             }
             return true;
         }
 
-        private void setReleaseAlarm(){
+        private void setReleaseAlarm() {
+            RequestQueue conect = Volley.newRequestQueue(getActivity());
             StringRequest stringRequest = new StringRequest(Request.Method.GET,
                     API_URL, new Response.Listener<String>() {
 
@@ -138,7 +146,7 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
                         JSONArray array = jsonObject.getJSONArray("results");
                         for (int i = 0; i < array.length(); i++){
 
-                            ItemsListMovie movies = new ItemsListMovie();
+                            ItemListMovieNotify movies = new ItemListMovieNotify();
 
                             JSONObject data = array.getJSONObject(i);
                             movies.setId_movie(data.getInt("id"));
@@ -147,18 +155,17 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
                             movies.setRealese_movie(data.getString("release_date"));
                             movies.setImage_movie(data.getString("poster_path"));
                             movies.setRate_movie(data.getString("vote_average"));
-                            listMovies.add(movies);
 
                             if (movies.getRealese_movie().equals(now)){
-                                listMovies.add(movies);
+                                samelistMovies.add(movies);
                                 Log.v("Is there", ""+samelistMovies.size());
                             }
                         }
-                        UpcomingReminder.setAlarm(getActivity(), samelistMovies);
 
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
+                    reminder_upcoming.setAlarm(getActivity(), samelistMovies);
 
                 }
             }, new Response.ErrorListener() {
@@ -171,8 +178,9 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
                 }
             });
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            requestQueue.add(stringRequest);
+
+            conect.add(stringRequest);
+
         }
 
     }

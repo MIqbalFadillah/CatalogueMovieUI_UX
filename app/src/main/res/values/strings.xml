@@ -22,6 +22,8 @@
     <string name="rate">Rate</string>
     <string name="share">Share</string>
     <string name="notify_daily">Hello there, Let Check It Out Some Good Movies</string>
+    <string name="today__release_reminder">%s Release today, don\'t forget to watch it!</string>
+
 
     <string name="key_today_reminder">key_today_reminder</string>
     <string name="daily_reminder">Daily Reminder</string>

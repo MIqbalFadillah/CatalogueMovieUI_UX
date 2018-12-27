@@ -21,7 +21,7 @@ import java.util.Calendar;
 public class DailyReminder extends BroadcastReceiver {
     public final static int NOTIFICATION_ID = 1;
     public static String NOTIFICATION_CHANEL_ID = "101";
-    public static CharSequence NOTIFICATION_CHANEL = "Movies channel";
+    public static CharSequence NOTIFICATION_CHANEL = "movies_channel";
     @Override
     public void onReceive(Context context, Intent intent) {
         getNotification(context, context.getString(R.string.app_name),

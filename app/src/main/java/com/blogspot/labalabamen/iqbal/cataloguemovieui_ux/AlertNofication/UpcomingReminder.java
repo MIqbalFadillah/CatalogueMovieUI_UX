@@ -17,7 +17,7 @@ import android.util.Log;
 
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemListMovieNotify;
 
 import java.util.Calendar;
 import java.util.List;
@@ -27,23 +27,34 @@ public class UpcomingReminder extends BroadcastReceiver {
     public final static int NOTIFICATION_ID = 100;
     public static String NOTIFICATION_CHANEL_ID = "101";
     public static CharSequence NOTIFICATION_CHANEL = "Movies channel";
-    static final String EXTRA_MOVIE = "EXTRA_MOVIE";
+    static final String EXTRA_MOVIE = "MOVE_MOVIE";
+
+//    public static String EXTRA_ID        = "" ;
+//    public static String EXTRA_TITLE        = "extra_title";
+//    public static String EXTRA_OVERVIEW     = "extra_overview";
+//    public static String EXTRA_RELEASE_DATE = "extra_release_date";
+//    public static String EXTRA_POSTER_JPG   = "extra_image";
+//    public static String EXTRA_RATE         = "extra_rate";
+
+    public ItemListMovieNotify movieResult;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String title = intent.getStringExtra("title_movie");
-        int id = intent.getIntExtra("id",0);
-        long id_movie = intent.getLongExtra("id_movie", 0);
-        String image = intent.getStringExtra("poster_movie");
-        String date = intent.getStringExtra("date_movie");
-        String rate = intent.getStringExtra("rating_movie");
-        String description = intent.getStringExtra("overview_movie");
-        ItemsListMovie movieResult = new ItemsListMovie();
-//        String desc =String.valueOf(String.format(context.getString(R.string.notify_daily), movieTitle));
-//        sendNotification(context, context.getString(context.getString(R.string.app_name), desc, id, movieResult));
+        int id = intent.getIntExtra("id", 0);
+
+        String title = intent.getStringExtra("title");
+        int id_movie = intent.getIntExtra("idMovie",0);
+        String image = intent.getStringExtra("image");
+        String realese = intent.getStringExtra("realase");
+        String rate = intent.getStringExtra("rate");
+        String description = intent.getStringExtra("description");
+        ItemListMovieNotify movieResult = new ItemListMovieNotify(id_movie,title,description,rate,image,realese);
+
+        String desc =String.valueOf(String.format(context.getString(R.string.today__release_reminder), title));
+        sendNotification(context, context.getString(R.string.app_name), desc, id, movieResult);
     }
 
-    private void sendNotification(Context context, String title, String desc, int id, ItemsListMovie movieResult){
+    private void sendNotification(Context context, String title, String desc, int id, ItemListMovieNotify movieResult){
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(
                 Context.NOTIFICATION_SERVICE);
@@ -80,25 +91,25 @@ public class UpcomingReminder extends BroadcastReceiver {
     }
 
 
-    public static void setAlarm(Context context, List<ItemsListMovie> movieResults) {
+    public static void setAlarm(Context context, List<ItemListMovieNotify> movieResults) {
         int delay = 0;
 
-        for (ItemsListMovie movie : movieResults) {
+        for (ItemListMovieNotify movie : movieResults) {
             cancelAlarm(context);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(context, DetailHome.class);
-            intent.putExtra("title_movie", movie.getTitle_movie());
-            intent.putExtra("movieid", movie.getId_movie());
-            intent.putExtra("poster_movie", movie.getImage_movie());
-            intent.putExtra("date_movie", movie.getRealese_movie());
-            intent.putExtra("rating_movie", movie.getRate_movie());
-            intent.putExtra("overview_movie", movie.getDescription_movie());
+            Intent intent = new Intent(context, UpcomingReminder.class);
+            intent.putExtra("title", movie.getTitle_movie());
+            intent.putExtra("idMovie", movie.getId_movie());
+            intent.putExtra("image", movie.getImage_movie());
+            intent.putExtra("realese", movie.getRealese_movie());
+            intent.putExtra("rate", movie.getRate_movie());
+            intent.putExtra("description", movie.getDescription_movie());
             intent.putExtra("id", notifId);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                     100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
+            calendar.set(Calendar.HOUR_OF_DAY, 7);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
 

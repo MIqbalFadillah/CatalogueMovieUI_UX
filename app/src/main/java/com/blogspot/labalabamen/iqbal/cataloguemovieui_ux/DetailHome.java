@@ -46,7 +46,7 @@ public class DetailHome extends AppCompatActivity {
         setContentView(R.layout.activity_detail_home);
 
         Intent intent = getIntent();
-        ItemsListMovie move_movie = intent.getParcelableExtra("MOVE_MOVIE");
+        itemsMovie = intent.getParcelableExtra("MOVE_MOVIE");
 
         tvJudul = (TextView)findViewById(R.id.home_TvJudul_recieve);
         tvOverview = (TextView)findViewById(R.id.home_TvDesc_recieve);
