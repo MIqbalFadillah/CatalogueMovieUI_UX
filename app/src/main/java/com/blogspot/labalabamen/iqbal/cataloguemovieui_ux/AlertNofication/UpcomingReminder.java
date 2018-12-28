@@ -18,9 +18,17 @@ import android.util.Log;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemListMovieNotify;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 
 import java.util.Calendar;
 import java.util.List;
+
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome.EXTRA_ID;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome.EXTRA_OVERVIEW;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome.EXTRA_POSTER_JPG;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome.EXTRA_RATE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome.EXTRA_RELEASE_DATE;
+import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.DetailHome.EXTRA_TITLE;
 
 public class UpcomingReminder extends BroadcastReceiver {
     private static int notifId = 1000;
@@ -29,37 +37,45 @@ public class UpcomingReminder extends BroadcastReceiver {
     public static CharSequence NOTIFICATION_CHANEL = "Movies channel";
     static final String EXTRA_MOVIE = "MOVE_MOVIE";
 
-//    public static String EXTRA_ID        = "" ;
-//    public static String EXTRA_TITLE        = "extra_title";
-//    public static String EXTRA_OVERVIEW     = "extra_overview";
-//    public static String EXTRA_RELEASE_DATE = "extra_release_date";
-//    public static String EXTRA_POSTER_JPG   = "extra_image";
-//    public static String EXTRA_RATE         = "extra_rate";
+    public static String EXTRA_ID        = "extra_id";
+    public static String EXTRA_TITLE        = "extra_title";
+    public static String EXTRA_OVERVIEW     = "extra_overview";
+    public static String EXTRA_RELEASE_DATE = "extra_release_date";
+    public static String EXTRA_POSTER_JPG   = "extra_image";
+    public static String EXTRA_RATE         = "extra_rate";
 
-    public ItemListMovieNotify movieResult;
+
+    List<ItemsListMovie> movieResult;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         int id = intent.getIntExtra("id", 0);
 
-        String title = intent.getStringExtra("title");
-        int id_movie = intent.getIntExtra("idMovie",0);
-        String image = intent.getStringExtra("image");
-        String realese = intent.getStringExtra("realase");
-        String rate = intent.getStringExtra("rate");
-        String description = intent.getStringExtra("description");
-        ItemListMovieNotify movieResult = new ItemListMovieNotify(id_movie,title,description,rate,image,realese);
+        String title = intent.getStringExtra(EXTRA_TITLE);
+        int id_movie = intent.getIntExtra(EXTRA_ID,0);
+        String image = intent.getStringExtra(EXTRA_POSTER_JPG );
+        String realese = intent.getStringExtra(EXTRA_RELEASE_DATE);
+        String rate = intent.getStringExtra(EXTRA_RATE );
+        String description = intent.getStringExtra(EXTRA_OVERVIEW);
+        ItemsListMovie movieResult = new ItemsListMovie(id_movie,title,description,rate,image,realese);
 
         String desc =String.valueOf(String.format(context.getString(R.string.today__release_reminder), title));
-        sendNotification(context, context.getString(R.string.app_name), desc, id, movieResult);
+        sendNotification(context, context.getString(R.string.app_name), desc, id,movieResult);
     }
 
-    private void sendNotification(Context context, String title, String desc, int id, ItemListMovieNotify movieResult){
+    private void sendNotification(Context context, String title, String desc, int id, ItemsListMovie movieResult){
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(
                 Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(context, DetailHome.class);
-        intent.putExtra(EXTRA_MOVIE, movieResult);
+        intent.putExtra(DetailHome.EXTRA_ID, movieResult.getId_movie());
+        intent.putExtra(DetailHome.EXTRA_TITLE, movieResult.getTitle_movie());
+        intent.putExtra(DetailHome.EXTRA_OVERVIEW, movieResult.getDescription_movie());
+        intent.putExtra(DetailHome.EXTRA_POSTER_JPG, movieResult.getImage_movie());
+        intent.putExtra(DetailHome.EXTRA_RELEASE_DATE, movieResult.getRealese_movie());
+        intent.putExtra(DetailHome.EXTRA_RATE, movieResult.getRealese_movie());
+
+
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -91,19 +107,19 @@ public class UpcomingReminder extends BroadcastReceiver {
     }
 
 
-    public static void setAlarm(Context context, List<ItemListMovieNotify> movieResults) {
+    public static void setAlarm(Context context, List<ItemsListMovie> movieResults) {
         int delay = 0;
 
-        for (ItemListMovieNotify movie : movieResults) {
+        for (ItemsListMovie movie : movieResults) {
             cancelAlarm(context);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, UpcomingReminder.class);
-            intent.putExtra("title", movie.getTitle_movie());
-            intent.putExtra("idMovie", movie.getId_movie());
-            intent.putExtra("image", movie.getImage_movie());
-            intent.putExtra("realese", movie.getRealese_movie());
-            intent.putExtra("rate", movie.getRate_movie());
-            intent.putExtra("description", movie.getDescription_movie());
+            intent.putExtra(EXTRA_TITLE, movie.getTitle_movie());
+            intent.putExtra(EXTRA_ID, movie.getId_movie());
+            intent.putExtra(EXTRA_POSTER_JPG, movie.getImage_movie());
+            intent.putExtra(EXTRA_RELEASE_DATE, movie.getRealese_movie());
+            intent.putExtra(EXTRA_RATE, movie.getRate_movie());
+            intent.putExtra(EXTRA_OVERVIEW, movie.getDescription_movie());
             intent.putExtra("id", notifId);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                     100, intent, PendingIntent.FLAG_UPDATE_CURRENT);

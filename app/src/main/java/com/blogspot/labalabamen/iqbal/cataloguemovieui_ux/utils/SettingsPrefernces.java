@@ -80,8 +80,8 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
         DailyReminder dailyReminder = new DailyReminder();
         UpcomingReminder reminder_upcoming = new UpcomingReminder();
 
-        List<ItemListMovieNotify> listMovies;
-        List<ItemListMovieNotify> samelistMovies;
+        List<ItemsListMovie> listMovies;
+        List<ItemsListMovie> samelistMovies;
 
         @Override
         public void onCreate(final Bundle savedInstanceState) {
@@ -146,7 +146,7 @@ public class SettingsPrefernces extends AppCompatPreferenceActivity {
                         JSONArray array = jsonObject.getJSONArray("results");
                         for (int i = 0; i < array.length(); i++){
 
-                            ItemListMovieNotify movies = new ItemListMovieNotify();
+                            ItemsListMovie movies = new ItemsListMovie();
 
                             JSONObject data = array.getJSONObject(i);
                             movies.setId_movie(data.getInt("id"));

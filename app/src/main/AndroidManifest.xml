@@ -49,7 +49,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/favorite_widget_info" />
         </receiver>
-
         <receiver
             android:name=".AlertNofication.DailyReminder"
             android:enabled="true"
@@ -65,7 +64,8 @@
 
         <activity
             android:name=".utils.SettingsPrefernces"
-            android:label="@string/title_activity_settings_prefernces"></activity>
+            android:label="@string/title_activity_settings_prefernces"/>
+        <activity android:name=".AlertNofication.DetailNotification"></activity>
     </application>
 
 </manifest>

@@ -51,6 +51,16 @@ public class ItemsListMovie implements Parcelable {
 
     }
 
+    public ItemsListMovie(int idMovie, String title, String description, String rate, String image, String realase) {
+        id_movie = idMovie;
+        title_movie = title;
+        description_movie = description;
+        rate_movie = rate;
+        image_movie = image;
+        realese_movie = realase;
+
+    }
+
 
     public int getId_movie() {
         return id_movie;

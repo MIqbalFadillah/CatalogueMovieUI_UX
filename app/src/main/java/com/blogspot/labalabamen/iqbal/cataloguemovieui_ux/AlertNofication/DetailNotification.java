@@ -1,30 +1,33 @@
-package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux;
+package com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.AlertNofication;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.*;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.MovieFavoriteHelper;
+import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.R;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemListMovieNotify;
 import com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.model.ItemsListMovie;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.blogspot.labalabamen.iqbal.cataloguemovieui_ux.Database.DatabaseContract.CONTENT_URI;
 
-public class DetailHome extends AppCompatActivity {
-    public static String EXTRA_MOVE = "extra_move";
+public class DetailNotification extends AppCompatActivity {
 
     public static String EXTRA_ID        = "extra_id";
     public static String EXTRA_TITLE        = "extra_title";
@@ -33,8 +36,18 @@ public class DetailHome extends AppCompatActivity {
     public static String EXTRA_POSTER_JPG   = "extra_image";
     public static String EXTRA_RATE         = "extra_rate";
 
-    private TextView tvJudul, tvOverview, tvReleaseDate, tvRating;
-    private ImageView imgPoster, imgFavorite;
+    @BindView(R.id.mTvDesc_recieve)
+    TextView tvOverview;
+    @BindView(R.id.mTvPoster_Movie)
+    ImageView imgPoster;
+    @BindView(R.id.img_item_favorite)
+    ImageView imgFavorite;
+    @BindView(R.id.mTvRealese_recieve)
+    TextView tvReleaseDate;
+    @BindView(R.id.mTvJudul_recieve)
+    TextView tvJudul;
+    @BindView(R.id.mTvRate_recieve)
+    TextView tvRating;
 
 
     private Boolean isFavorite = false;
@@ -42,61 +55,53 @@ public class DetailHome extends AppCompatActivity {
     private ItemsListMovie itemsMovie;
 
 
-    String  title, image;
+    String  title, image, description, realese, rating;
     int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_home);
+        ButterKnife.bind(this);
+
 
         Intent intent = getIntent();
         itemsMovie = intent.getParcelableExtra("MOVE_MOVIE");
+        NotifyData(itemsMovie);
+        id = itemsMovie.getId_movie();
+        title = itemsMovie.getTitle_movie();
+        image = itemsMovie.getImage_movie();
+        description = itemsMovie.getDescription_movie();
 
 
 
-        tvJudul = (TextView)findViewById(R.id.home_TvJudul_recieve);
-        tvOverview = (TextView)findViewById(R.id.home_TvDesc_recieve);
-        tvReleaseDate = (TextView)findViewById(R.id.home_TvRealese_recieve);
-        tvRating = (TextView)findViewById(R.id.home_TvRate_recieve);
-        imgPoster = (ImageView)findViewById(R.id.home_Poster_Movie);
-        imgFavorite = (ImageView)findViewById(R.id.img_item_favorite);
 
-        int id = getIntent().getIntExtra(EXTRA_ID, 0);
-        String title = getIntent().getStringExtra(EXTRA_TITLE);
-        String description = getIntent().getStringExtra(EXTRA_OVERVIEW);
-        String imageview = getIntent().getStringExtra(EXTRA_POSTER_JPG);
-        String release_date = getIntent().getStringExtra(EXTRA_RELEASE_DATE);
-        String rating = getIntent().getStringExtra(EXTRA_RATE);
-
-
-        itemsMovie = new ItemsListMovie();
-        itemsMovie.setId_movie(id);
-        itemsMovie.setTitle_movie(title);
-        itemsMovie.setDescription_movie(description);
-        itemsMovie.setImage_movie(imageview);
-        itemsMovie.setRealese_movie(release_date);
-        itemsMovie.setRate_movie(rating);
+//       int id = itemsMovie.getId_movie();
+//       String title = itemsMovie.getTitle_movie();
+//        String realese = itemsMovie.getRealese_movie();
+//        String  rating = itemsMovie.getRate_movie();
+//        String image = itemsMovie.getImage_movie();
+//        String description = itemsMovie.getDescription_movie();
+//
+//        itemsMovie = new ItemsListMovie();
+//        itemsMovie.setId_movie(id);
+//        itemsMovie.setTitle_movie(title);
+//        itemsMovie.setDescription_movie(description);
+//        itemsMovie.setImage_movie(image);
+//        itemsMovie.setRealese_movie(description);
+//        itemsMovie.setRate_movie(rating);
 
 
+//        tvJudul.setText(title);
+//        tvOverview.setText(description);
+//        tvOverview = (TextView)findViewById(R.id.mTvDesc_recieve);
+//        tvReleaseDate.setText(realese);
+//        tvReleaseDate = (TextView)findViewById(R.id.mTvRealese_recieve);
+//        tvRating.setText(rating);
+//        tvRating = (TextView)findViewById(R.id.mTvRate_recieve);
+//
+//        imgPoster = (ImageView)findViewById(R.id.tvPoster_Movie);
 
-        SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = date_format.parse(release_date);
-
-            SimpleDateFormat new_date_format = new SimpleDateFormat("EEEE, MMM dd, yyyy");
-            String date_of_release = new_date_format.format(date);
-            tvReleaseDate.setText(date_of_release);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        tvReleaseDate.setText(release_date);
-
-        tvJudul.setText(title);
-        tvOverview.setText(description);
-        tvRating.setText(String.format(getString(R.string.score),rating));
-        Picasso.with(getApplicationContext()).load("http://image.tmdb.org/t/p/w500/"+imageview).into(imgPoster);
 
 
         loadDataFavorite();
@@ -116,6 +121,15 @@ public class DetailHome extends AppCompatActivity {
                 FavChangeColor();
             }
         });
+
+    }
+
+    public void NotifyData (ItemsListMovie movie){
+        Picasso.with(getApplicationContext()).load("http://image.tmdb.org/t/p/w500/"+image).into(imgPoster);
+        tvJudul.setText(movie.getTitle_movie());
+        tvOverview.setText(movie.getDescription_movie());
+        tvReleaseDate.setText(movie.getRealese_movie());
+        tvRating.setText(movie.getRate_movie());
 
     }
 
@@ -150,12 +164,12 @@ public class DetailHome extends AppCompatActivity {
 
     private void FavSave(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(FavoriteField.FIELD_ID,itemsMovie.getId_movie());
-        contentValues.put(FavoriteField.FIELD_TITLE,itemsMovie.getTitle_movie());
-        contentValues.put(FavoriteField.FIELD_POSTER,itemsMovie.getImage_movie());
-        contentValues.put(FavoriteField.FIELD_RELEASE_DATE,itemsMovie.getRealese_movie());
-        contentValues.put(FavoriteField.FIELD_RATE,itemsMovie.getRate_movie());
-        contentValues.put(FavoriteField.FIELD_OVERVIEW,itemsMovie.getDescription_movie());
+        contentValues.put(DatabaseContract.FavoriteField.FIELD_ID,itemsMovie.getId_movie());
+        contentValues.put(DatabaseContract.FavoriteField.FIELD_TITLE,itemsMovie.getTitle_movie());
+        contentValues.put(DatabaseContract.FavoriteField.FIELD_POSTER,itemsMovie.getImage_movie());
+        contentValues.put(DatabaseContract.FavoriteField.FIELD_RELEASE_DATE,itemsMovie.getRealese_movie());
+        contentValues.put(DatabaseContract.FavoriteField.FIELD_RATE,itemsMovie.getRate_movie());
+        contentValues.put(DatabaseContract.FavoriteField.FIELD_OVERVIEW,itemsMovie.getDescription_movie());
         getContentResolver().insert(CONTENT_URI, contentValues);
         Toast.makeText(this, R.string.save, Toast.LENGTH_SHORT).show();
     }
