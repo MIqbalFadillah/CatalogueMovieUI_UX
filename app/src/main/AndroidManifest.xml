@@ -65,7 +65,6 @@
         <activity
             android:name=".utils.SettingsPrefernces"
             android:label="@string/title_activity_settings_prefernces"/>
-        <activity android:name=".AlertNofication.DetailNotification"></activity>
     </application>
 
 </manifest>

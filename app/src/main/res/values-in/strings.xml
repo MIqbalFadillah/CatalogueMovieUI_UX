@@ -24,20 +24,20 @@
 
     <string name="empty_text">Tidak Ada Data</string>
     <string name="appwidget_text">Film Favorit</string>
-    <string name="notify_daily">Hello there, Let Check It Out Some Good Movies</string>
-    <string name="today__release_reminder">%s Release today, don\'t forget to watch it!</string>
+    <string name="notify_daily">Ayo!!! nonton film-film bagus</string>
+    <string name="today__release_reminder">%s Rilis hari ini, Ayo jangan lupa ditonton!</string>
 
     <string name="key_today_reminder">key_today_reminder</string>
-    <string name="daily_reminder">Daily Reminder</string>
-    <string name="select_daily_reminder">You will reveiced daily reminder every 8 AM</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="select_daily_reminder">Anda akan mendapatkan notifikasi setiap jam 8 pagi</string>
     <string name="key_release_reminder">key_release_reminder</string>
-    <string name="select_release_reminder">You will receive daily movie release info every 7 AM</string>
-    <string name="release_reminder">Release Reminder</string>
-    <string name="lang_title">Language</string>
-    <string name="select_lang">Select language</string>
-    <string name="lang">Language</string>
+    <string name="select_release_reminder">Anda akan mendapatkan notifikasi setiap jam 7 pagi terkait film yang rilis hari ini</string>
+    <string name="release_reminder">Pengingat Rilis</string>
+    <string name="lang_title">Bahasa</string>
+    <string name="select_lang">Pilih Bahasa</string>
+    <string name="lang">Bahasa</string>
     <string name="key_lang">key_lang</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">Notifikasi</string>
 
 
 

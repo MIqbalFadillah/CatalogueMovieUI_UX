@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.Binder;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -37,10 +38,7 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
             throw new IllegalStateException("Position Invalid");
         }
         return new  ItemsListMovie(cursor);
-//        return new ItemsListMovie(
-//                cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.FavoriteField.FIELD_ID)),
-//                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.FavoriteField.FIELD_TITLE)),
-//                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.FavoriteField.FIELD_POSTER)));
+
     }
 
 
@@ -58,11 +56,21 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
 
     @Override
     public void onDataSetChanged() {
+        if (cursor != null) {
+            cursor.close();
+        }
+        final long identityToken = Binder.clearCallingIdentity();
+        cursor = mContext.getContentResolver().query(
+                DatabaseContract.CONTENT_URI, null, null, null, null);
+        Binder.restoreCallingIdentity(identityToken);
 
     }
 
     @Override
     public void onDestroy() {
+        if (cursor != null) {
+            cursor.close();
+        }
 
     }
 
@@ -112,7 +120,7 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return cursor.moveToPosition(position) ? cursor.getLong(0) : position;
     }
 
     @Override

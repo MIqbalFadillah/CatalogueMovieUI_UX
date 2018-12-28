@@ -28,18 +28,18 @@
     <string name="empty_text">Pas de données</string>
     <string name="appwidget_text">Film préféré</string>
 
-    <string name="notify_daily">Hello there, Let Check It Out Some Good Movies</string>
-    <string name="today__release_reminder">%s Release today, don\'t forget to watch it!</string>
+    <string name="notify_daily">Bonjour, laissez vérifier quelques bons films</string>
+    <string name="today__release_reminder">%s Sortie aujourd'hui, nepas oublie de le regarder!</string>
 
     <string name="key_today_reminder">key_today_reminder</string>
-    <string name="daily_reminder">Daily Reminder</string>
-    <string name="select_daily_reminder">You will reveiced daily reminder every 8 AM</string>
+    <string name="daily_reminder">Rappel quotidien</string>
+    <string name="select_daily_reminder">Un rappel quotidien tous les 8h</string>
     <string name="key_release_reminder">key_release_reminder</string>
-    <string name="select_release_reminder">You will receive daily movie release info every 7 AM</string>
-    <string name="release_reminder">Release Reminder</string>
-    <string name="lang_title">Language</string>
-    <string name="select_lang">Select language</string>
-    <string name="lang">Language</string>
+    <string name="select_release_reminder">Vous recevrez des informations sur les sorties du film tous les jours à 7 heures.</string>
+    <string name="release_reminder">Rappel de sortie</string>
+    <string name="lang_title">La langue</string>
+    <string name="select_lang">Choisir la langue</string>
+    <string name="lang">La langue</string>
     <string name="key_lang">key_lang</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">Les notifications</string>
 </resources>
